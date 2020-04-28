@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 
 /**
  * <> Define your pages here
+ * You can use snippet rfc to create a functional component
  */
 import Home from './pages/home';
 //* </> End Pages
