@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import background from '../assets/images/background.svg';
 
 export default createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap');
@@ -10,7 +11,7 @@ export default createGlobalStyle`
   }
 
   body {
-    background: #fefefe;
+    background: #191920 url(${background}) no-repeat center top;
     -webkit-font-smoothing: antialiased;
   }
 

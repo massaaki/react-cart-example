@@ -6,13 +6,14 @@ import { Switch, Route } from 'react-router-dom';
  * You can use snippet rfc to create a functional componentgit
  */
 import Home from './pages/Home';
+import Cart from './pages/Cart';
 //* </> End Pages
 
 export default function Routes() {
   return (
     <Switch>
       <Route exact path="/" component={Home} />
-      {/* <Route path="/PATH" component={PAGE_NAME} /> */}
+      <Route path="/cart" component={Cart} />
     </Switch>
   );
 }
