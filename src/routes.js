@@ -3,9 +3,9 @@ import { Switch, Route } from 'react-router-dom';
 
 /**
  * <> Define your pages here
- * You can use snippet rfc to create a functional component
+ * You can use snippet rfc to create a functional componentgit
  */
-import Home from './pages/home';
+import Home from './pages/Home';
 //* </> End Pages
 
 export default function Routes() {
