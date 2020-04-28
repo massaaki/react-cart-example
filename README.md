@@ -6,6 +6,7 @@ This is a React Boilerplate with:
 - prettier
 - babel-prettier
 - global-styles (styled-components)
+- Default font: Roboto (from google fonts)
 ```
 
 overwrite config to Airbnb style guide
