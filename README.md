@@ -1,4 +1,4 @@
-# React Boilerplate to start generic new projects
+# Cart projet with React
 This is a React Boilerplate with:
 ```configuration
 - eslint
