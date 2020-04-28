@@ -1,4 +1,4 @@
-# Boilerplate
+# React Boilerplate to start generic new projects
 This is a React Boilerplate with:
 ```configuration
 - eslint
@@ -16,8 +16,11 @@ overwrite config to Airbnb style guide
 
 
 ## Steps to generate same boilerplate from zero
-yarn create react-app <project-name>
 
+### Create a new react project
+```
+yarn create react-app <project-name>
+```
 ### Created .editorconfig
 ```editor
 root = true
@@ -47,3 +50,50 @@ yarn add babel-eslint -D # configure babel to use last javascripts features
 ```
 
 
+### Change .eslintrc.js
+```estlinrc
+module.exports = {
+  env: {
+    browser: true,
+    es6: true,
+  },
+  extends: [
+    'plugin:react/recommended',
+    'airbnb',
+    'prettier',
+    'prettier/react'
+  ],
+  globals: {
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly',
+  },
+  parser: 'babel-eslint',
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
+    },
+    ecmaVersion: 2018,
+    sourceType: 'module',
+  },
+  plugins: [
+    'react',
+    'prettier'
+  ],
+  rules: {
+    'prettier/prettier': 'error',
+    'react/jsx-filename-extension': [
+      'warn',
+      { extensions: ['.jsx', '.js'] }
+    ],
+    'import/prefer-default-export': 'off'
+  },
+};
+```
+
+### Create file .prettierrc in root path and add these lines
+```prettierrc
+{
+  "singleQuote": true,
+  "trailingComma": "es5"
+}
+```
