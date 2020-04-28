@@ -97,3 +97,8 @@ module.exports = {
   "trailingComma": "es5"
 }
 ```
+
+### Routes
+```routes
+yarn add react-router-dom
+```
