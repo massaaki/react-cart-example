@@ -3,7 +3,7 @@ import produce from 'immer';
 //all reducers listen all actions
 export default function cart(state = [], action) {
   switch(action.type) {
-    case 'ADD_TO_CART':
+    case '@Cart/ADD':
       return produce(state, draft => {
         const productIndex = draft.findIndex(p => p.id === action.product.id);
 
@@ -16,7 +16,7 @@ export default function cart(state = [], action) {
           });
         }
       });
-    case 'REMOVE_FROM_CART':
+    case '@Cart/REMOVE':
       return produce(state, draft => {
           const productIndex = draft.findIndex( p => p.id === action.id);
 
