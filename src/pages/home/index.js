@@ -59,4 +59,4 @@ class Home extends Component {
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(CartActions, dispatch);
-export default  connect(null, mapDispatchToProps) (Home);
+export default connect(null, mapDispatchToProps) (Home);
