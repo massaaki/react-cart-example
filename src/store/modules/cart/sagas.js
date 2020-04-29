@@ -7,19 +7,35 @@
 
 
 //Imports
-import { call, put, all, takeLatest } from 'redux-saga/effects'; //for async methods and returns promises and put call redux action
+import { call, select, put, all, takeLatest } from 'redux-saga/effects'; //for async methods and returns promises and put call redux action
 import api from '../../../services/api';
+import { formatPrice } from '../../../util/format';
 
-import { addToCartSuccess } from './actions';
+import { addToCartSuccess, updateAmmount } from './actions';
 
 
 
 //asterisco no js significa generator, similar ao async, mas com mais recursos
 function* addToCart({id}) {
   console.log('addToCart');
+  const productExists = yield select(
+    state => state.cart.find(p => p.id === id),
+  )
+
+  if (productExists) {
+    const amount = productExists.amount + 1;
+      yield put(updateAmmount(id, amount));
+  } else {
   const response = yield call(api.get, `/products/${id}`);
 
-  yield put(addToCartSuccess(response.data));
+    const data = {
+      ...response.data,
+      amount: 1,
+      priceFormatted: formatPrice( response.data.price ),
+    }
+
+    yield put(addToCartSuccess(data));
+  }
 
 }
 
