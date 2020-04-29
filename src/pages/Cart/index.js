@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import {
   MdRemoveCircleOutline,
   MdAddCircleOutline,
@@ -6,7 +7,8 @@ import {
 } from 'react-icons/md';
 import { Container, ProductTable, Total } from './styles';
 
-export default function Cart() {
+function Cart({cart, dispatch}) {
+
   return (
     <Container>
       <ProductTable>
@@ -20,16 +22,17 @@ export default function Cart() {
           </tr>
         </thead>
         <tbody>
-          <tr>
+          { cart.map(product => (
+            <tr key={product.id}>
             <td>
               <img
-                src="https://static.netshoes.com.br/produtos/tenis-mizuno-jet-3-n-feminino/34/D16-2249-234/D16-2249-234_zoom2.jpg?ts=1587439510&ims=120x"
-                alt="tenis"
+                src={product.image}
+                alt={product.title}
               />
             </td>
             <td>
-              <strong>Tenis muito massa</strong>
-              <span>R$ 120,00</span>
+              <strong>{product.title}</strong>
+              <span>{product.priceFormatted}</span>
             </td>
 
             <td>
@@ -37,7 +40,7 @@ export default function Cart() {
                 <button type="button">
                   <MdRemoveCircleOutline size={20} color="#7159c1" />
                 </button>
-                <input type="number" readOnly value={1} />
+                <input type="number" readOnly value={product.amount} />
                 <button type="button">
                   <MdAddCircleOutline size={20} color="#7159c1" />
                 </button>
@@ -48,11 +51,13 @@ export default function Cart() {
               <strong>R$ 253,90</strong>
             </td>
             <td>
-              <button type="button">
+              <button type="button" onClick={() => dispatch({ type: 'REMOVE_FROM_CART', id: product.id })}>
                 <MdDelete size={20} color="#7159c1" />
               </button>
             </td>
           </tr>
+
+          )) }
         </tbody>
       </ProductTable>
       <footer>
@@ -66,3 +71,10 @@ export default function Cart() {
     </Container>
   );
 }
+
+
+const mapStateToProps = state => ({
+  cart: state.cart,
+});
+
+export default connect(mapStateToProps)(Cart);
