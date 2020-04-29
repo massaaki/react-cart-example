@@ -12,14 +12,13 @@ import {toast} from 'react-toastify';
 import api from '../../../services/api';
 import { formatPrice } from '../../../util/format';
 
-import { addToCartSuccess, updateAmmount } from './actions';
+import { addToCartSuccess, updateAmmountSuccess } from './actions';
 
 
 
 
 //asterisco no js significa generator, similar ao async, mas com mais recursos
 function* addToCart({id}) {
-  console.log('addToCart');
   const productExists = yield select(
     state => state.cart.find(p => p.id === id),
   )
@@ -39,7 +38,7 @@ function* addToCart({id}) {
 
   if (productExists) {
     // const amount = productExists.amount + 1;
-      yield put(updateAmmount(id, amount));
+      yield put(updateAmmountSuccess(id, amount));
   } else {
   const response = yield call(api.get, `/products/${id}`);
 
@@ -54,8 +53,26 @@ function* addToCart({id}) {
 
 }
 
+
+function* updateAmount({id, amount}) {
+
+  if(amount <= 0) return;
+
+  const stock = yield call(api.get, `stock/${id}`);
+  const stockAmount = stock.data.amount;
+
+  if( amount > stockAmount) {
+    toast.error('A quantidade solicitada não tem em estoque');
+    return;
+  }
+
+  yield put(updateAmmountSuccess(id, amount));
+}
+
+
 //all is a listener
 //takeLatest - if all to api doesnt concluded, get only latest.
 export default all([
   takeLatest('@Cart/ADD_REQUEST', addToCart),
+  takeLatest('@cart/UPDATE_AMOUNT_REQUEST', updateAmount),
 ]);
